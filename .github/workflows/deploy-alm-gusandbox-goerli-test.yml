@@ -40,8 +40,8 @@ jobs:
       - name: Build
         run: yarn build:alm --if-present
         env:
-          REACT_APP_COMMON_HOME_BRIDGE_ADDRESS: '0xc39eAbae09273F00Ec7e56B6a8C189437a61C9C8'
-          REACT_APP_COMMON_FOREIGN_BRIDGE_ADDRESS: '0x0F806D8dd8bb02Ad9dd9bA0e8e351B4319cc45e4'
+          REACT_APP_COMMON_HOME_BRIDGE_ADDRESS: '0x5Cc827961fA3d00e1D4ce10f6b61e573bAdad3b8'
+          REACT_APP_COMMON_FOREIGN_BRIDGE_ADDRESS: '0x2495f1469B559baB2BaB16F8124924E0ccD43FD6'
           REACT_APP_COMMON_HOME_RPC_URL: 'https://sandbox1.japanopenchain.org:8545/'
           REACT_APP_COMMON_FOREIGN_RPC_URL: 'https://eth-goerli.g.alchemy.com/v2/HkYkNKeP9ObMS1ukI2TmWtBTdzSBwT-k'
           REACT_APP_ALM_HOME_NETWORK_NAME: 'G.U.Sandbox'
