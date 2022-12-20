@@ -39,4 +39,27 @@ jobs:
           REACT_APP_COMMON_FOREIGN_BRIDGE_ADDRESS: '0x823a3B2d770840E4D6C1C484f084BcB491B2EcEC'
           REACT_APP_COMMON_HOME_RPC_URL: 'https://sandbox1.japanopenchain.org:8545/'
           REACT_APP_COMMON_FOREIGN_RPC_URL: 'https://eth-goerli.g.alchemy.com/v2/HkYkNKeP9ObMS1ukI2TmWtBTdzSBwT-k'
-"deploy-alm-gusandbox-goerli-stg.yml" 65L, 2680C
+          REACT_APP_ALM_HOME_NETWORK_NAME: 'G.U.Sandbox'
+          REACT_APP_ALM_FOREIGN_NETWORK_NAME: 'Goerli'
+          REACT_APP_ALM_HOME_EXPLORER_TX_TEMPLATE: 'https://sandbox1.japanopenchain.org/tx/%s'
+          REACT_APP_ALM_FOREIGN_EXPLORER_TX_TEMPLATE: 'https://goerli.etherscan.io/tx/%s'
+          REACT_APP_ALM_HOME_EXPLORER_API: 'https://sandbox1.japanopenchain.org/api'
+          REACT_APP_ALM_FOREIGN_EXPLORER_API: 'https://api-goerli.etherscan.io/?apikey=GMTSS17Q7R3H5W4CVUHUYD8MX48PIAPKTW'
+
+      - name: Generate deployment package
+        run: zip -r deploy.zip . -x '*.git*' -x '.env' -x '*node_modules*' -x '*.yaml'
+
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+
+      - name: Deploy to Stage EB
+        uses: einaregilsson/beanstalk-deploy@v11
+        with:
+          aws_access_key: ${{ secrets.AWS_STG_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_STG_SECRET_ACCESS_KEY }}
+          application_name: bridge-alm
+          environment_name: alm-stg-node16
+          version_label: ${{ steps.get_version.outputs.VERSION }}
+          region: ap-northeast-1
+          deployment_package: deploy.zip
