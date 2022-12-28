@@ -1,4 +1,4 @@
-name: Deploy ALM GUSandbox-Goerli to Test environment
+name: Deploy ALM to Test
 on:
   push:
     tags: ['v*']

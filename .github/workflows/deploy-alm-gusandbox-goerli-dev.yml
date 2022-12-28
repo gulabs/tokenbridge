@@ -1,4 +1,4 @@
-name: Deploy ALM GUSandbox-Goerli to Dev environment
+name: Deploy ALM to Dev
 on:
   push:
     branches: ['main']
